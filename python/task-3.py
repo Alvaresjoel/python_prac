@@ -4,6 +4,7 @@ class Product:
         self.price = price
 
     
+    
 product_list = []
 product1 = Product("Laptop", 1200.00)
 product2 = Product("Smartphone", 800.00)
