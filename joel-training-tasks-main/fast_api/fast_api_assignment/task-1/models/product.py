@@ -10,5 +10,5 @@ class Product(Base):
     price = Column(Float)
     category = Column(String(20))
     stock_quantity = Column(Integer)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(TIMESTAMP,default=datetime.now())
+    updated_at = Column(TIMESTAMP,onupdate=datetime.now()) 
