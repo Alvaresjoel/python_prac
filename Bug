@@ -1,0 +1,84 @@
+1. Identified Code Smells
+
+1.1 Primitive Obsession
+
+The code stores order_id, customer_name, customer_email, product_name, and so on as plain strings instead of using domain-specific value objects or classes (e.g., Email, Money, Product).
+
+Email validation is a simple string check instead of a dedicated validator or library.
+
+
+Why it’s bad:
+Harder to enforce business rules, more prone to bugs, and repetitive logic appears in multiple places if scaled.
+
+
+---
+
+1.2 Long Method
+
+process_order() handles:
+
+Validation
+
+Calculations
+
+Printing/logging
+
+
+This violates the Single Responsibility Principle.
+
+
+Why it’s bad:
+Difficult to test, maintain, and reuse code; any change in one concern risks breaking another.
+
+
+---
+
+1.3 Long Parameter List
+
+__init__ takes 7 parameters (order_id, customer_name, customer_email, etc.).
+
+These could be grouped into smaller objects (e.g., Customer, Product, OrderDetails).
+
+
+Why it’s bad:
+Leads to cluttered code, hard to understand method signatures, and increases chance of passing wrong values in wrong order.
+
+
+---
+
+1.4 Large Class
+
+OrderProcessor stores data, validates orders, calculates totals, and handles I/O.
+
+Multiple responsibilities packed into one class.
+
+
+Why it’s bad:
+Breaks cohesion; harder to reuse, test, or extend.
+
+
+---
+
+1.5 Data Clumps
+
+Groups of parameters (customer_name, customer_email) often go together — should be wrapped in a Customer class.
+
+Similarly (product_name, product_price, quantity) belong together as a Product or OrderItem.
+
+
+
+---
+
+1.6 Duplicate Code
+
+Printing output involves repeated string formatting for displaying data.
+
+If format changes, all occurrences must be updated.
+
+
+
+---
+
+1.7 Dead Code
+
+_is_email_valid() is defined but never used in process_order().
